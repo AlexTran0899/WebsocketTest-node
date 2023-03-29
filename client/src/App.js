@@ -1,35 +1,37 @@
 import './App.css';
-import io from 'socket.io-client'
+import {getSocket} from "./Websocket";
 import {useEffect, useState} from "react";
 
-const socket = io.connect("http://localhost:3001")
-
-
+// const socket = io.connect("http://localhost:3001")
 
 function App() {
-    const [message, setMessage] = useState('')
-    const [messageReceive, setMessageReceive] = useState('')
+    const [isOn, setIsOn] = useState(false)
+    const socket = getSocket()
 
-    useEffect(() => {
-        socket.on("receive_message", (data) => {
-            // setMessageReceive(data.message)
-            alert(data.message)
-        })
-    }, [socket])
-    const sendMessage = () => {
-        socket.emit("send_message", {message})
+    socket.on("light_bulb_state_to_client" , (data) => {
+        console.log("here")
+        setIsOn(data.light_bulb_is)
+    })
+    const sendState = (light_bulb_curr_state) => {
+        socket.emit("light_bulb_state_to_server", {light_bulb_is: light_bulb_curr_state})
     }
-    const onChange = (e) => {
-        const value = e.target.value
-        setMessage(value)
+
+    const onClick = () => {
+        const light_bulb_curr_state = !isOn
+        setIsOn(light_bulb_curr_state)
+        sendState(light_bulb_curr_state)
     }
 
     return (
-        <div className="App">
-            <input placeholder="Message..." onChange={onChange}/>
-            <button onClick={sendMessage}>Send message</button>
-            <h1>`Message receive ${messageReceive}`</h1>
-        </div>
+            <body className={isOn?"on" : ""} onClick={onClick}>
+            <div className="light Z">
+                <div className="wire"></div>
+                <div className="bulb">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            </body>
     );
 }
 

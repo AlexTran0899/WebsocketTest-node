@@ -15,10 +15,14 @@ const io = new Server(server, {
 })
 
 io.on("connection", (socket) => {
-    console.log(`user connected:  ${socket.id}`)
-    socket.on("send_message", (data) => {
-        socket.broadcast.emit("receive_message", data)
+    socket.on("light_bulb_state_to_server", (data) => {
+        console.log("here")
+        socket.broadcast.emit("light_bulb_state_to_client", data)
     })
+    // socket.on("light_bulb_state_to_server_from_joseph", (data) => {
+    //     socket.broadcast.emit("light_bulb_state_to_client_from_joseph", data)
+    // })
 })
+
 module.exports = server
 
