@@ -17,6 +17,7 @@ const io = new Server(server, {
         methods: ["GET","POST","PUT","DELETE"],
     }
 })
+let message = ""
 
 app.get('/api/get/true', (req, res) => {
     res.json(true)
@@ -25,9 +26,13 @@ app.get('/api/get/false', (req, res) => {
     res.json(false)
 })
 
+app.get('/api/get/message', (req,res) => {
+    res.json(message)
+})
+
 app.post('/api/post', (req, res) => {
-    console.log(req.body)
-    res.json(req.body.message + "1")
+    message = req.body.message
+    res.json(message + "1")
 })
 
 io.on("connection", (socket) => {
