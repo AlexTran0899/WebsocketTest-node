@@ -5,6 +5,14 @@ const cors = require('cors')
 
 const app = express()
 app.use(cors())
+
+app.get('/api/get/true', (req, res) => {
+    res.json(true)
+})
+app.get('/api/get/false', (req, res) => {
+    res.json(false)
+})
+
 const server = http.createServer(app)
 
 const io = new Server(server, {
@@ -16,12 +24,11 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
     socket.on("light_bulb_state_to_server", (data) => {
-        console.log("here")
         socket.broadcast.emit("light_bulb_state_to_client", data)
     })
-    // socket.on("light_bulb_state_to_server_from_joseph", (data) => {
-    //     socket.broadcast.emit("light_bulb_state_to_client_from_joseph", data)
-    // })
+    socket.on("light_bulb_state_to_server_from_joseph", (data) => {
+        socket.broadcast.emit("light_bulb_state_to_client_from_joseph", data)
+    })
 })
 
 module.exports = server

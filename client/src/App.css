@@ -26,7 +26,7 @@ body.on
   z-index: 2;
   cursor: pointer;
 }
-body.on .bulb
+div.on .bulb
 {
   background: #fff;
   box-shadow: 0 0 50px #fff,
@@ -49,11 +49,11 @@ body.on .bulb
   border-top: 30px solid #000;
   border-radius: 10px;
 }
-body.on .bulb::before
+div.on .bulb::before
 {
   background: #fff;
 }
-body.on .bulb::after
+div.on .bulb::after
 {
   content: '';
   position: absolute;
@@ -79,7 +79,7 @@ body.on .bulb::after
   border-bottom-right-radius: 40px;
   box-shadow: 20px 20px 0 10px #444;
 }
-body.on .bulb span:nth-child(1)
+div.on .bulb span:nth-child(1)
 {
   box-shadow: 20px 20px 0 10px #fff;
 }
@@ -96,7 +96,7 @@ body.on .bulb span:nth-child(1)
   border-bottom-left-radius: 40px;
   box-shadow: -20px 20px 0 10px #444;
 }
-body.on .bulb span:nth-child(2)
+div.on .bulb span:nth-child(2)
 {
   box-shadow: -20px 20px 0 10px #fff;
 }
