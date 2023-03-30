@@ -2,16 +2,12 @@ const express = require('express')
 const http = require('http')
 const { Server } = require('socket.io')
 const cors = require('cors')
+const bodyParser = require('body-parser')
 
 const app = express()
 app.use(cors())
 
-app.get('/api/get/true', (req, res) => {
-    res.json(true)
-})
-app.get('/api/get/false', (req, res) => {
-    res.json(false)
-})
+app.use(bodyParser.json())
 
 const server = http.createServer(app)
 
@@ -20,6 +16,18 @@ const io = new Server(server, {
         origin: "*",
         methods: ["GET","POST","PUT","DELETE"],
     }
+})
+
+app.get('/api/get/true', (req, res) => {
+    res.json(true)
+})
+app.get('/api/get/false', (req, res) => {
+    res.json(false)
+})
+
+app.post('/api/post', (req, res) => {
+    console.log(req.body)
+    res.json(req.body.message + "1")
 })
 
 io.on("connection", (socket) => {
