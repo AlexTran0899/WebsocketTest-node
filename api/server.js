@@ -3,6 +3,7 @@ const http = require('http')
 const { Server } = require('socket.io')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const {json} = require("express");
 
 const app = express()
 app.use(cors())
@@ -18,6 +19,17 @@ const io = new Server(server, {
     }
 })
 let message = ""
+const defMessage = {
+    message: "hello world",
+    light_bulb_state: true,
+    josph_ballin: false
+}
+
+let jsonObj = {
+    message: "hello world",
+    light_bulb_state: true,
+    josph_ballin: false
+}
 
 app.get('/api/get/true', (req, res) => {
     res.json(true)
@@ -31,11 +43,17 @@ app.get('/api/get/message', (req,res) => {
 })
 
 app.get('/api/get/json', (req,res) => {
-    res.json({
-        message: "hello world",
-        light_bulb_state: true,
-        josph_ballin: false
-    })
+    res.json(jsonObj)
+})
+
+app.get('/api/get/reset', (req,res) => {
+    jsonObj = defMessage
+    res.json(jsonObj)
+})
+
+app.post('/api/post/json', (req,res) => {
+    jsonObj = req.body
+    res.json("json updated, maybe")
 })
 
 app.post('/api/post', (req, res) => {
