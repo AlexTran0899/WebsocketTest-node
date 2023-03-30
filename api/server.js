@@ -30,6 +30,14 @@ app.get('/api/get/message', (req,res) => {
     res.json(message)
 })
 
+app.get('/api/get/json', (req,res) => {
+    res.json({
+        message: "hello world",
+        light_bulb_state: true,
+        josph_ballin: false
+    })
+})
+
 app.post('/api/post', (req, res) => {
     message = req.body.message
     res.json(message + "1")

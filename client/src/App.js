@@ -1,6 +1,5 @@
 import './App.css';
 import io from 'socket.io-client'
-import axios from 'axios'
 import {useEffect, useState} from "react";
 
 const socket = io.connect("https://websocketcackend.herokuapp.com/")
@@ -31,25 +30,18 @@ function App() {
         sendState(light_bulb_curr_state)
     }
 
-    const setMessage = () => {
-        alert("message set")
-    }
 
     return (
         <div>
-            {/*<div className={isOn?"on" : ""} onClick={onClick}>*/}
-            {/*    <div className="light Z">*/}
-            {/*        <div className="wire"></div>*/}
-            {/*        <div className="bulb">*/}
-            {/*            <span></span>*/}
-            {/*            <span></span>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            <form onSubmit={setMessage}>
-                <input type="text"/>
-                <button type="submit"></button>
-            </form>
+            <div className={isOn?"on" : ""} onClick={onClick}>
+                <div className="light Z">
+                    <div className="wire"></div>
+                    <div className="bulb">
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
