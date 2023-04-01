@@ -96,7 +96,24 @@ app.post('/api/post/route', (req,res) => {
 })
 
 app.get('/api/post/reset', (req ,res) => {
-    route = []
+    route = [
+{"id": "70b7d144-052e-4a4b-819c-29b7ce029258", 
+"lat": 36.06958271606873,
+"long": -94.16920373403134,
+"itemName": "washing machine",
+ "itemWeight": "heavy",
+ "itemSize": "Large",
+"itemType": "Metal",
+ "itemNotes": "Please be careful there are dogs"
+}, {"id": "70b7d144-052e-4a4b-819c-29b7ce029298", 
+"lat": 36.073779922514824,
+"long": -94.18023297659553,
+"itemName": "Dryer machine",
+ "itemWeight": "heavy",
+"itemType": "Metal",
+ "itemSize": "Large",
+ "itemNotes": "It's going to be hard finding a place to park"
+}]
     res.json("route reset")
 })
 
