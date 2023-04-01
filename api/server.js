@@ -52,7 +52,11 @@ app.get('/api/get/reset', (req,res) => {
 })
 
 app.post('/api/post/json', (req,res) => {
-    jsonObj = JSON.parse(req.body)
+    req.body = JSON.parse(req.body)
+    req.body.lat = parseDouble(req.body.lat)
+    req.body.long = parseDouble(req.body.long)
+    jsonObj = req.body
+
     res.json("json updated, maybe")
 })
 
