@@ -66,6 +66,7 @@ app.get('/api/get/route', (req,res) => {
 })
 
 app.post('/api/post/route', (req,res) => {
+    req.body.status = "pending"
     res.json(route.push(req.body))
 })
 
