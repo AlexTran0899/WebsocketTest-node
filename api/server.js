@@ -71,7 +71,7 @@ app.post('/api/post/route', (req,res) => {
 })
 
 app.get('/api/post/reset', (req ,res) => {
-    route = {}
+    route = []
     res.json("route reset")
 })
 
