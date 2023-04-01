@@ -9,6 +9,12 @@ app.use(cors())
 
 app.use(bodyParser.json())
 
+function UUID() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+  }
+
 const server = http.createServer(app)
 
 const io = new Server(server, {
@@ -70,6 +76,7 @@ app.get('/api/get/route', (req,res) => {
 })
 
 app.post('/api/post/route', (req,res) => {
+    req.body.id = UUID()
     req.body.status = "pending"
     req.body.lat =  parseFloat(req.body.lat)
     req.body.long = parseFloat(req.body.long)
