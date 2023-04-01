@@ -52,9 +52,9 @@ app.get('/api/get/reset', (req,res) => {
 })
 
 app.post('/api/post/json', (req,res) => {
-    req.body = JSON.parse(req.body)
-    req.body.lat = parseDouble(req.body.lat)
-    req.body.long = parseDouble(req.body.long)
+    // req.body = JSON.parse(req.body)
+    req.body.lat =  parseFloat(req.body.lat)
+    req.body.long = parseFloat(req.body.long)
     jsonObj = req.body
 
     res.json("json updated, maybe")
@@ -71,6 +71,8 @@ app.get('/api/get/route', (req,res) => {
 
 app.post('/api/post/route', (req,res) => {
     req.body.status = "pending"
+    req.body.lat =  parseFloat(req.body.lat)
+    req.body.long = parseFloat(req.body.long)
     res.json(route.push(req.body))
 })
 
